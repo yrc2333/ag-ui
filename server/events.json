@@ -1,0 +1,573 @@
+{
+  "description": "AG-UI 标准事件流 - 计算器演示",
+  "events": [
+    {
+      "type": "run-started",
+      "threadId": "thread_demo_001",
+      "runId": "run_demo_001"
+    },
+    {
+      "type": "step-started",
+      "stepName": "analyze_request"
+    },
+    {
+      "type": "step-finished",
+      "stepName": "analyze_request"
+    },
+    {
+      "type": "text-message-start",
+      "messageId": "msg_001",
+      "role": "assistant"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "收"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "到"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "您"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "的"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "计"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "请"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "求"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "，"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "让"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "我"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "来"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "分"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "析"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "一"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "下"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_001",
+      "delta": "..."
+    },
+    {
+      "type": "text-message-end",
+      "messageId": "msg_001"
+    },
+    {
+      "type": "text-message-start",
+      "messageId": "msg_002",
+      "role": "assistant"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "这"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "是"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "一"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "个"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "简"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "单"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "的"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "加"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "法"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "运"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "："
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "1 + 1"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "。"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "我"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "现"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "在"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "调"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "用"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "计"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "器"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "工"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "具"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "来"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "执"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "行"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "计"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_002",
+      "delta": "。"
+    },
+    {
+      "type": "text-message-end",
+      "messageId": "msg_002"
+    },
+    {
+      "type": "step-started",
+      "stepName": "invoke_calculator"
+    },
+    {
+      "type": "tool-call-start",
+      "toolCallId": "tool_001",
+      "toolCallName": "calculator"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": "{"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": "\n  \"expression\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": " \"1 + 1\""
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": ",\n  \"operator\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": " \"add\""
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": ",\n  \"operands\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": " [1, 1]\n"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_001",
+      "delta": "}"
+    },
+    {
+      "type": "tool-call-end",
+      "toolCallId": "tool_001"
+    },
+    {
+      "type": "tool-call-result",
+      "messageId": "msg_tool_001",
+      "toolCallId": "tool_001",
+      "content": "2",
+      "role": "tool"
+    },
+    {
+      "type": "step-finished",
+      "stepName": "invoke_calculator"
+    },
+    {
+      "type": "step-started",
+      "stepName": "process_result"
+    },
+    {
+      "type": "text-message-start",
+      "messageId": "msg_003",
+      "role": "assistant"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "计"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "完"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "成"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "！"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "让"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "我"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "验"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "证"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "一"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "下"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "结"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "果"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_003",
+      "delta": "..."
+    },
+    {
+      "type": "text-message-end",
+      "messageId": "msg_003"
+    },
+    {
+      "type": "tool-call-start",
+      "toolCallId": "tool_002",
+      "toolCallName": "validator"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": "{"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": "\n  \"check\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": " \"verify_calculation\""
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": ",\n  \"expected\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": " 2"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": ",\n  \"expression\":"
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": " \"1 + 1\""
+    },
+    {
+      "type": "tool-call-args",
+      "toolCallId": "tool_002",
+      "delta": "\n}"
+    },
+    {
+      "type": "tool-call-end",
+      "toolCallId": "tool_002"
+    },
+    {
+      "type": "tool-call-result",
+      "messageId": "msg_tool_002",
+      "toolCallId": "tool_002",
+      "content": "{ \"valid\": true, \"confidence\": 0.9999 }",
+      "role": "tool"
+    },
+    {
+      "type": "text-message-start",
+      "messageId": "msg_004",
+      "role": "assistant"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "✅ "
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "验"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "证"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "通"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "过"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "！"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "1 + 1"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": " 的"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "计"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "算"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "结"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "果"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "是 "
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "**2**"
+    },
+    {
+      "type": "text-message-content",
+      "messageId": "msg_004",
+      "delta": "。"
+    },
+    {
+      "type": "text-message-end",
+      "messageId": "msg_004"
+    },
+    {
+      "type": "step-finished",
+      "stepName": "process_result"
+    },
+    {
+      "type": "run-finished",
+      "threadId": "thread_demo_001",
+      "runId": "run_demo_001",
+      "outcome": "success"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Node.js 服务端事件流配置",
+    "note": "服务端从此文件读取事件并流式输出"
+  }
+}
