@@ -260,12 +260,17 @@ export interface AgentSubscription {
   unsubscribe: () => void;
 }
 
+export interface AgentRun {
+  runId: string;
+  subscribe: (handlers: {
+    next?: EventHandler;
+    error?: ErrorHandler;
+    complete?: CompleteHandler;
+  }) => AgentSubscription;
+  abort: () => void;
+}
+
 export interface Agent {
-  run(input: RunAgentInput): {
-    subscribe: (handlers: {
-      next?: EventHandler;
-      error?: ErrorHandler;
-      complete?: CompleteHandler;
-    }) => AgentSubscription;
-  };
+  run(input: RunAgentInput): AgentRun;
+  abortRun(runId: string): void;
 }

@@ -3,7 +3,7 @@ import { ref, nextTick, watch } from 'vue';
 import { useAgent } from '../composables/useAgent';
 
 // Use the agent composable - 使用 HTTP 服务
-const { messages, isRunning, currentToolCall, sendMessage, clearMessages } = useAgent();
+const { messages, isRunning, currentToolCall, sendMessage, abortRun, clearMessages } = useAgent();
 
 // Input state
 const inputValue = ref('');
@@ -251,19 +251,32 @@ const parseToolArgs = (args: string): any => {
           </div>
         </div>
         
+        <!-- 发送按钮 / 终止按钮 -->
         <button
+          v-if="!isRunning"
           @click="handleSend"
-          :disabled="!inputValue.trim() || isRunning"
+          :disabled="!inputValue.trim()"
           :class="[
             'flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-200 shadow-lg',
-            inputValue.trim() && !isRunning
+            inputValue.trim()
               ? 'bg-emerald-600 hover:bg-emerald-700 text-white hover:shadow-xl hover:shadow-emerald-200 hover:-translate-y-0.5'
               : 'bg-slate-200 text-slate-400 cursor-not-allowed'
           ]"
         >
-          <div v-if="isRunning" class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-          <svg v-else class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+          </svg>
+        </button>
+        
+        <!-- 终止按钮 -->
+        <button
+          v-else
+          @click="abortRun"
+          class="flex items-center justify-center w-12 h-12 rounded-xl bg-red-500 hover:bg-red-600 text-white transition-all duration-200 shadow-lg hover:shadow-xl hover:shadow-red-200 hover:-translate-y-0.5"
+          title="终止响应"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>

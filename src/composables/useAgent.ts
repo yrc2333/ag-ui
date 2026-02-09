@@ -1,7 +1,8 @@
 // Vue Composable for AG-UI Agent
-import { ref, type Ref } from 'vue';
+import { reactive, ref, type Ref } from "vue";
 import {
   type Agent,
+  type AgentRun,
   type RunAgentInput,
   type AGUIEvent,
   type ToolCall,
@@ -17,12 +18,12 @@ import {
   TOOL_CALL_ARGS,
   TOOL_CALL_END,
   TOOL_CALL_RESULT,
-} from '../types/ag-ui';
-import { createAgent, type AgentConfig } from '../config/agent.config';
+} from "../types/ag-ui";
+import { createAgent, type AgentConfig } from "../config/agent.config";
 
 export interface StreamMessage {
   id: string;
-  role: 'user' | 'assistant' | 'tool';
+  role: "user" | "assistant" | "tool";
   content: string;
   isStreaming?: boolean;
   toolCalls?: ToolCall[];
@@ -39,6 +40,7 @@ export interface UseAgentReturn {
   isRunning: Ref<boolean>;
   currentToolCall: Ref<ToolCall | null>;
   sendMessage: (content: string) => void;
+  abortRun: () => void;
   clearMessages: () => void;
 }
 
@@ -47,7 +49,7 @@ export interface UseAgentReturn {
  */
 export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
   const { agent: customAgent, config } = options;
-  
+
   // 根据配置创建 Agent 实例
   const agent = customAgent || createAgent(config);
 
@@ -60,6 +62,9 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
   const activeMessages = new Map<string, StreamMessage>();
   const activeToolCalls = new Map<string, ToolCall>();
 
+  // 当前运行的 Agent 实例
+  let currentRun: AgentRun | null = null;
+
   /**
    * Send a message to the agent
    */
@@ -68,8 +73,8 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
 
     // Add user message
     const userMessage: StreamMessage = {
-      id: generateId('user_'),
-      role: 'user',
+      id: generateId("user_"),
+      role: "user",
       content,
       timestamp: Date.now(),
     };
@@ -81,7 +86,7 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
 
     // Prepare input
     const input: RunAgentInput = {
-      messages: messages.value.map(m => ({
+      messages: messages.value.map((m) => ({
         id: m.id,
         role: m.role,
         content: m.content,
@@ -90,20 +95,42 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
     };
 
     // Run agent
-    agent.run(input).subscribe({
+    currentRun = agent.run(input);
+    currentRun.subscribe({
       next: (event: AGUIEvent) => {
         handleEvent(event);
       },
       error: (err: Error) => {
-        console.error('Agent error:', err);
+        console.error("Agent error:", err);
         isRunning.value = false;
         currentToolCall.value = null;
+        currentRun = null;
       },
       complete: () => {
         isRunning.value = false;
         currentToolCall.value = null;
+        currentRun = null;
       },
     });
+  };
+
+  /**
+   * Abort the current run
+   */
+  const abortRun = () => {
+    if (currentRun) {
+      currentRun.abort();
+      currentRun = null;
+      isRunning.value = false;
+      currentToolCall.value = null;
+
+      // 标记所有正在流式传输的消息为已完成
+      for (const [id, msg] of activeMessages) {
+        msg.isStreaming = false;
+      }
+      activeMessages.clear();
+      activeToolCalls.clear();
+    }
   };
 
   /**
@@ -112,26 +139,26 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
   const handleEvent = (event: AGUIEvent) => {
     switch (event.type) {
       case RUN_STARTED:
-        console.log('Run started:', event.runId);
+        console.log("Run started:", event.runId);
         break;
 
       case RUN_FINISHED:
-        console.log('Run finished:', event.outcome);
+        console.log("Run finished:", event.outcome);
         break;
 
       case RUN_ERROR:
-        console.error('Run error:', event.message);
+        console.error("Run error:", event.message);
         break;
 
       case TEXT_MESSAGE_START: {
         // Initialize new streaming message
-        const newMessage: StreamMessage = {
+        const newMessage: StreamMessage = reactive({
           id: event.messageId,
-          role: event.role === 'assistant' ? 'assistant' : 'user',
-          content: '',
+          role: event.role === "assistant" ? "assistant" : "user",
+          content: "",
           isStreaming: true,
           timestamp: Date.now(),
-        };
+        });
         activeMessages.set(event.messageId, newMessage);
         messages.value.push(newMessage);
         break;
@@ -161,7 +188,7 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
         const toolCall: ToolCall = {
           id: event.toolCallId,
           name: event.toolCallName,
-          arguments: '',
+          arguments: "",
         };
         activeToolCalls.set(event.toolCallId, toolCall);
         currentToolCall.value = toolCall;
@@ -185,7 +212,7 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
           // Attach to last assistant message
           const lastAssistantMsg = [...messages.value]
             .reverse()
-            .find(m => m.role === 'assistant');
+            .find((m) => m.role === "assistant");
           if (lastAssistantMsg) {
             if (!lastAssistantMsg.toolCalls) {
               lastAssistantMsg.toolCalls = [];
@@ -201,7 +228,7 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
         // Add tool result as a message
         messages.value.push({
           id: event.messageId,
-          role: 'tool',
+          role: "tool",
           content: event.content,
           timestamp: Date.now(),
         });
@@ -216,15 +243,15 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
       }
 
       case STEP_STARTED:
-        console.log('Step started:', event.stepName);
+        console.log("Step started:", event.stepName);
         break;
 
       case STEP_FINISHED:
-        console.log('Step finished:', event.stepName);
+        console.log("Step finished:", event.stepName);
         break;
 
       default:
-        console.log('Unhandled event:', event.type, event);
+        console.log("Unhandled event:", event.type, event);
     }
   };
 
@@ -243,15 +270,14 @@ export function useAgent(options: UseAgentOptions = {}): UseAgentReturn {
     isRunning,
     currentToolCall,
     sendMessage,
+    abortRun,
     clearMessages,
   };
 }
 
-
-
 /**
  * Generate unique ID
  */
-function generateId(prefix: string = ''): string {
+function generateId(prefix: string = ""): string {
   return `${prefix}${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 }
