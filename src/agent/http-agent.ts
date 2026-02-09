@@ -42,7 +42,8 @@ export class HttpAgent implements Agent {
     const runId = generateId();
     const url = `${this.baseUrl}${this.endpoint}`;
     const abortController = new AbortController();
-    this.activeRuns.set(runId, abortController);
+    const { activeRuns } = this;
+    activeRuns.set(runId, abortController);
 
     return {
       runId,
@@ -126,7 +127,7 @@ export class HttpAgent implements Agent {
         };
 
         const cleanup = () => {
-          this.activeRuns.delete(runId);
+          activeRuns.delete(runId);
         };
 
         fetchEvents();
